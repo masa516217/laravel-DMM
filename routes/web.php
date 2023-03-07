@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,7 @@ use App\Http\Controllers\WelcomeController;
 |
 */
 //tasukukannri
-Route::get('/', [AuthController::class, 'index']);
+Route::get('/task/list', [TaskController::class, 'list']);
 
 
 //test
