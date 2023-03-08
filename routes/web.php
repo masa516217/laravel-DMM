@@ -17,7 +17,7 @@ use App\Http\Controllers\TestController;
 |
 */
 //tasukukannri
-Route::get('/task/list', [TaskController::class, 'list']);
+Route::get('/', [AuthController::class, 'index']);
 Route::get('/task/list', [TaskController::class, 'list']);
 
 //test
@@ -25,3 +25,4 @@ Route::get('/welcome', [WelcomeController::class, 'index']);
 Route::get('/welcome/second', [WelcomeController::class, 'second']);
 //form in
 Route::get('/test', [TestController::class, 'index']);
+Route::post('/test/input', [TestController::class, 'input']);
