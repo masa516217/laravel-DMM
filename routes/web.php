@@ -19,6 +19,7 @@ use App\Http\Controllers\TestController;
 //tasukukannri
 Route::get('/', [AuthController::class, 'index']);
 Route::get('/task/list', [TaskController::class, 'list']);
+Route::post('/login', [AuthController::class, 'login']);
 
 //test
 Route::get('/welcome', [WelcomeController::class, 'index']);
