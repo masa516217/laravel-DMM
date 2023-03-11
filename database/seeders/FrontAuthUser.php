@@ -21,6 +21,7 @@ class FrontAuthUser extends Seeder
             'email' => 'hoge@example.com',
             'email_verified_at' => date('Y-m-d H:i:s'),
             'password' => Hash::make('pass'),
+            
         ]);
         
     }
