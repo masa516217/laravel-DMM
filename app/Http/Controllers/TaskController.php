@@ -87,7 +87,7 @@ var_dump($sql);
     {
         // task_idのレコードを取得する
         // テンプレートに「取得したレコード」の情報を渡す
-        return $this->singleTaskRender($task_id, 'task.detail');
+        return $this->singleTaskRender($task_id, 'task.edit');
     }
     /**
      * 単一のタスクModelの取得
