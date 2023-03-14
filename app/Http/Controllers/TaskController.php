@@ -76,18 +76,84 @@ var_dump($sql);
      */
     public function detail($task_id)
     {
-       // task_idのレコードを取得する
+        //
+        return $this->singleTaskRender($task_id, 'task.detail');
+    }
+    
+    /**
+     * タスクの編集画面表示
+     */
+    public function edit($task_id)
+    {
+        // task_idのレコードを取得する
+        // テンプレートに「取得したレコード」の情報を渡す
+        return $this->singleTaskRender($task_id, 'task.detail');
+    }
+    /**
+     * 単一のタスクModelの取得
+     */
+    protected function getTaskModel($task_id)
+    {
+         // task_idのレコードを取得する
        $task = TaskModel::find($task_id);
        if ($task === null) {
-           return redirect('/task/list');
+           return null;
        }
        // 本人以外のタスクならNGとする
        if ($task->user_id !== Auth::id()) {
-           return redirect('/task/list');
+           return null;
        }
+       //
+       return $task;
+    }
     
+    /**
+     * 単一のタスク表示
+     */
+    protected function singleTaskRender($task_id, $template_name)
+    { 
+        
+        // task_idのレコードを取得する
+        $task = $this->getTaskModel($task_id);
+        if ($task === null) {
+            return redirect('/task/list');
+        }
        // テンプレートに「取得したレコード」の情報をわたす
-       return view('task.detail', ['task' => $task]);
+       return view($template_name, ['task' => $task]);
        
+    }
+    /**
+     * タスクの編集処理
+     */
+    public function editSave(TaskRegisterPostRequest $request, $task_id)
+    {
+        //formからの情報を取得する(validate済みのデータの取得)
+        $datum = $request->validated();
+        
+        //task_idのレコードを取得する
+        $task = $this->getTaskModel($task_id);
+        if ($task === null) {
+            return redirect('/task/list');
+        }
+        //
+        //レコードの内容をUPDATEする
+        $task->name = $datum['name'];
+        $task->period = $datum['period'];
+        $task->detail = $datum['detail'];
+        $task->priority = $datum['priority'];
+        
+    /*    
+        //可変変数を使ったかきかた
+        foreach($datum as $k => $v) {
+            $task->$k = $v;
+        }
+    */
+        //レコードの更新
+        $task->save();
+        
+        //タスク編集成功
+        $request->session()->flash('front.task_edit_succes', true);
+        //詳細閲覧画面にリダイレクトする
+        return redirect(route('detail', ['task_id' => $task->id]));
     }
 }
