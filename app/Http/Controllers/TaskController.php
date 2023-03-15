@@ -23,18 +23,12 @@ class TaskController extends Controller
         $per_page = 5;
         
         // 一覧の取得
-        $list = TaskModel::where('user_id', Auth::id())
-        ->orderBy('priority', 'DESC')
-        ->orderBy('period')
-        ->orderBy('created_at')
-        ->paginate($per_page);
-        //->get();
+        $list = $this->getListBuilder()
+                     ->paginate($per_page);
+       
     /*
-$sql = TaskModel::where('user_id', Auth::id())
-->orderBy('priority', 'DESC')
-->orderBy('period')
-->orderBy('created_at')
-->toSql();
+$sql = $this ->getListBuilder()
+             ->toSql();
 //echo "<pre>\n"; var_dump($sql, $list); exit;
 var_dump($sql);
 */
@@ -223,5 +217,31 @@ var_dump($sql);
         
         //一覧に遷移する
         return redirect('/task/list');
+    }
+    
+    /**
+     * csv ダウンロード
+     */
+    public function csvDownload()
+    {
+        // ダウンロードさせたいCSVを作成する
+        //データを取得する
+        $list = $this->getListBuilder()->get();
+    var_dump($list->toArry()); exit;
+        // CSVを出力する
+        return response('1,2,3')
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', 'attachment; filename="test.csv"');
+    }
+    
+    /**
+     * 一覧用のIlluminate\Database\Eloquent\Builder インスタンスの取得
+     */
+    protected function getListBuilder()
+    {
+        return TaskModel::where('user_id', Auth::id())
+                    ->orderBy('priority', 'DESC')
+                    ->orderBy('period')
+                    ->orderBy('created_at');
     }
 }
