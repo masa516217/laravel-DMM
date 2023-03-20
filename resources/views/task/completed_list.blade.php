@@ -4,7 +4,7 @@
 @section('title')(詳細画面)@endsection
 
 {{-- メインコンテンツ --}}
-@section('contets')
+@section('contents')
         <h1>完了タスクの一覧</h1>
         <a href="/task/list">タスク一覧に戻る</a><br>
         <table border="1">
