@@ -5,6 +5,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -47,6 +48,12 @@ Route::get('/welcome/second', [WelcomeController::class, 'second']);
 //form in
 Route::get('/test', [TestController::class, 'index']);
 Route::post('/test/input', [TestController::class, 'input']);
+
+//会員登録
+Route::prefix('/user')->group(function () {
+    Route::get('/register', [UserController::class, 'index']);
+    Route::post('/register', [UserController::class, 'register']);
+});
 
 //管理画面
 Route::prefix('/admin')->group(function () {
