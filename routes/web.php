@@ -5,10 +5,11 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\CompletedTaskController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+
+use App\Http\Controllers\CompletedTaskController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +23,6 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 //tasukukannri
 Route::get('/', [AuthController::class, 'index'])->name('front.index');
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/completed_tasks/list', [CompletedTaskController::class, 'list']);
 //　認可処理
 Route::middleware(['auth'])->group(function() {
 Route::prefix('/task')->group(function () {
@@ -35,6 +35,7 @@ Route::prefix('/task')->group(function () {
     Route::post('/complete/{task_id}', [TaskController::class, 'complete'])->whereNumber('task_id')->name('complete');
     Route::get('/csv/download', [TaskController::class, 'csvDownload']);
     });
+    Route::get('/completed_tasks/list', [CompletedTaskController::class, 'list']);
     //
     Route::get('/logout', [AuthController::class, 'logout']);
 });
