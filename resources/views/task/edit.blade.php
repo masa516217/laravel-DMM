@@ -6,7 +6,7 @@
 {{--main contents--}}
 @section('contents')
 
-        <h1>タスクの登録</h1>
+        <h1>タスクの編集</h1>
             @if (session('front.task_register_succcess') == true)
                 タスクを登録しました！！<br>
             @endif
@@ -26,7 +26,7 @@
                 重要度:<label><input type="radio" name="priority" value="1" @if ((old('priority') ?? $task->priority) == 1) checked @endif>低い</label> / 
                     <label><input type="radio" name="priority" value="2" @if ((old('priority') ?? $task->priority) == 2) checked @endif>普通</label> / 
                     <label><input type="radio" name="priority" value="3" @if ((old('priority') ?? $task->priority) == 3) checked @endif>高い</label><br>
-                <button>タスクを登録する</button>
+                <button>タスクを編集する</button>
             </form>
             
         <hr>
