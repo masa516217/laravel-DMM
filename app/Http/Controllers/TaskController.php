@@ -48,6 +48,7 @@ var_dump($sql);
         //$user = Auth::user();
         //$id = Auth::id();
         //var_dump($datum, $user, $id); exit;
+        //
         
         // user_idの追加
         $datum['user_id'] = Auth::id();

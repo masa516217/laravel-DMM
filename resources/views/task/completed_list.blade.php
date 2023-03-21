@@ -46,4 +46,5 @@
         <menu label="リンク">
         <a href="/logout">ログアウト</a><br>
         </menu>
+        {{----}}
 @endsection
