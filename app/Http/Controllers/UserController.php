@@ -33,8 +33,8 @@ class UserController extends Controller
         try {
             $r = UserModel::create($datum);
         } catch(\Throwable $e) {
-           //echo $e->getMessage();
-            //exit;
+           echo $e->getMessage();
+            exit;
         }
        //ユーザ登録完了
        $request->session()->flash('front.user_register_success', true);
