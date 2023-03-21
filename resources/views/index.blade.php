@@ -2,6 +2,9 @@
 {{-- main contents --}}
 @section('contents')
         <h1>ログイン</h1>
+        @if (session('front.user_register_success') == true)
+        会員登録しました<br>
+@endif
      @if ($errors->any())
         <div>
         @foreach ($errors->all() as $error)

@@ -2,9 +2,6 @@
 {{--メインコンテンツ--}}
 @section('contents')
 <h1>ユーザ登録</h1>
-@if (session('front.task_register_success') == true)
-        会員登録しました<br>
-@endif
 @if ($errors->any())
     <div>
         @foreach ($errors->all() as $error)
